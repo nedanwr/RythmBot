@@ -1,7 +1,7 @@
 import {
     Client,
     Collection,
-    IntentsBitField,
+    GatewayIntentBits,
     Partials
 } from "discord.js";
 import { ConfigManager } from "../managers/config";
@@ -31,15 +31,16 @@ export class Rythm extends Client {
             },
             intents: [
                 // Privileged Intents
-                IntentsBitField.Flags.GuildMembers,
-                IntentsBitField.Flags.GuildMessageTyping,
+                GatewayIntentBits.GuildMembers,
+                GatewayIntentBits.GuildMessageTyping,
+                GatewayIntentBits.MessageContent,
 
                 // Regular Intents
-                IntentsBitField.Flags.GuildEmojisAndStickers,
-                IntentsBitField.Flags.GuildMessageReactions,
-                IntentsBitField.Flags.GuildMessages,
-                IntentsBitField.Flags.Guilds,
-                IntentsBitField.Flags.GuildVoiceStates
+                GatewayIntentBits.GuildEmojisAndStickers,
+                GatewayIntentBits.GuildMessageReactions,
+                GatewayIntentBits.GuildMessages,
+                GatewayIntentBits.Guilds,
+                GatewayIntentBits.GuildVoiceStates
             ]
         });
         this.commands = new Collection();
