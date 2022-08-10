@@ -8,20 +8,12 @@ const ENV_MODE_FILE_EXT: string =
     process.env.NODE_ENV === "production" ? ".js" : ".ts";
 
 export const loadEvents = (client: Rythm) => {
-    const eventsPath: string = join(__dirname, "../events");
-    const eventFiles: string[] = readdirSync(eventsPath).filter((file) => file.endsWith(ENV_MODE_FILE_EXT));
-
+    const eventFiles = readdirSync(join(__dirname, "../events")).filter((file: string) => file.endsWith(ENV_MODE_FILE_EXT));
     for (const file of eventFiles) {
-        const filePath: string = join(eventsPath, file);
-        const event: any = require(filePath);
-
-        if (event.once) {
-            client.once(event.name, (...args) => event.run(...args));
-        }
-        else {
-            client.on(event.name, (...args) => event.run(...args));
-        }
-
-        logger.info(`[Events] ${event.name} event loaded!`);
+        const event = require(`../events/${file}`);
+        const eventName: string | undefined = file.split(".").shift();
+        client.on(eventName!, event.bind(null, client));
+        delete require.cache[require.resolve(`../events/${file}`)];
+        logger.info(`[Event] ${eventName} event loaded`);
     }
 }
