@@ -13,6 +13,10 @@ interface PresenceSettings {
     type: PresenceStatusData | undefined;
 }
 
+interface MusicSettings {
+    maxVolume: number;
+}
+
 export class ConfigManager extends Manager {
     botSettings = (): BotSettings => ({
         token: config.token,
@@ -24,4 +28,8 @@ export class ConfigManager extends Manager {
         message: config.presence.activity.message,
         type: config.presence.activity.type,
     });
+
+    musicSettings = (): MusicSettings => ({
+        maxVolume: config.music.max_volume,
+    })
 }
