@@ -1,0 +1,10 @@
+{
+  "name": "@rythm/bot",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Yet another open-source discord music bot",
+  "main": "build/index.js",
+  "repository": "git@github.com:nedanwr/RythmBot.git",
+  "author": "Naveed Ali Anwar <hello@naveedalianwar.com>",
+  "license": "MIT"
+}
